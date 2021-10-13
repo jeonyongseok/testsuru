@@ -8,8 +8,6 @@ jobs:
   rubocop:
     runs-on: ubuntu-latest
 
-    environment: MY_ENVIRONMENTS
-
     steps:
       - uses: actions/checkout@v2
       
