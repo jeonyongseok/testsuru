@@ -1,0 +1,17 @@
+name: 'config'
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+
+    environment: MY_ENVIRONMENTS
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: call secrets
+        run: echo "${{ secrets.MY_SECRETS_TOKEN }}"
