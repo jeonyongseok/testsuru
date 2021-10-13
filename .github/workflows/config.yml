@@ -7,10 +7,10 @@ on:
 jobs:
   rubocop:
     runs-on: ubuntu-latest
-
+    environment: MY_ENVIRONMENTS
     steps:
       - uses: actions/checkout@v2
-      - environments: MY_ENVIRONMENTS
+
       - name: call secrets
         run: |
           if [ -s ${{ secrets.MY_SECRETS_TOKEN}}]; then
