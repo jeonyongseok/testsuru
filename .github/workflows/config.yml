@@ -13,7 +13,7 @@ jobs:
 
       - name: call secrets
         run: |
-          if [ -n ${{ secrets.MY_SECRETS_TOKEN}}]; then
+          if [ -n ${{ secrets.MY_SECRETS_TOKEN}} ]; then
             echo "secrets呼び出し成功。${{ secrets.MY_SECRETS_TOKEN}}"
           else
             echo "secrets呼び出し失敗。${{ secrets.MY_SECRETS_TOKEN}}"
