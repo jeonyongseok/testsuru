@@ -10,6 +10,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
+      - environments: MY_ENVIRONMENTS
       - name: call secrets
-        run: echo "${{ secrets.MY_SECRETS_TOKEN }}"
+        run: |
+          if [ -s ${{ secrets.MY_SECRETS_TOKEN}}]; then
+            echo "secrets呼び出し成功。${{ secrets.MY_SECRETS_TOKEN}}"
+          else
+            echo "secrets呼び出し失敗。${{ secrets.MY_SECRETS_TOKEN}}"
+          fi
