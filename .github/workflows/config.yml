@@ -33,7 +33,9 @@ jobs:
       - name: Rubocop
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bundle exec rubocop >> test.txt
+        run: |
+        bundle exec rubocop \
+        > test.txt 
       - name: reviewdog
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
