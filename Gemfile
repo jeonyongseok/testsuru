@@ -48,7 +48,6 @@ group :development do
   # Read more: https://github.com/rails/spring
   gem 'spring', '~> 2.0.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  # DBのデータからseedファイルを作成してくれる
   gem 'seed_dump', '~> 3.3.1'
 end
 
