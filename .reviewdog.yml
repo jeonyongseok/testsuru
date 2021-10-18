@@ -1,3 +1,6 @@
 runner:
   rubocop:
-    cmd: bundle exec rubocop
+    cmd: |
+      if [ -s "./ruby-files.txt" ]; then
+        cat ./ruby-files.txt | xargs bundle exec rubocop
+      fi
