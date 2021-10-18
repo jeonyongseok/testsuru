@@ -1,0 +1,43 @@
+name: 'config'
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.5.1
+
+      - name: Setup reviewdog
+        uses: reviewdog/action-setup@v1
+
+      - name: Cache gems
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gem-
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install --path vendor/bundle --without production
+
+      - name: Make ruby diff list
+        run: |
+          git --no-pager diff --name-only --diff-filter=AMCR origin/${GITHUB_BASE_REF}..origin/${GITHUB_HEAD_REF} -- "*.rb" \
+          > ruby-files.txt || echo 'ruby not exists'
+
+      - name: Rubocop
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: reviewdog -reporter=github-pr-review -fail-on-error=true
