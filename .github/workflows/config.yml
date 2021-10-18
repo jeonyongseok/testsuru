@@ -42,5 +42,5 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ -s "./ruby-files.txt" ]; then
-            cat ./ruby-files.txt | xargs reviewdog -reporter=github-pr-review -fail-on-error=true
+            cat ./ruby-files.txt | xargs reviewdog -reporter=github-pr-review
           fi
